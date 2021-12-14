@@ -4,14 +4,17 @@ plugins {
     id 'maven-publish'
 }
 
-afterEvaluate {
+task androidSourcesJar(type: Jar) {
+    classifier 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+project.afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
                 from components.release
-                groupId = 'com.github.s578741931'
-                artifactId = 'banner'
-                version = '1.0.0'
+                artifact androidSourcesJar // optional sources
             }
         }
     }
