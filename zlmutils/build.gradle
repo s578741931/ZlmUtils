@@ -4,17 +4,14 @@ plugins {
     id 'maven-publish'
 }
 
-task androidSourcesJar(type: Jar) {
-    classifier 'sources'
-    from android.sourceSets.main.java.srcDirs
-}
-
-project.afterEvaluate {
+afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
                 from components.release
-                artifact androidSourcesJar // optional sources
+                groupId = 'com.noahcrt.zlmutils'
+                artifactId = 'zlmutils'
+                version = '1.0.7'
             }
         }
     }
